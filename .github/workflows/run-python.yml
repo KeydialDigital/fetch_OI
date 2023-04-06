@@ -2,7 +2,7 @@ name: Fetch Option Chain Data
 
 on:
   schedule:
-    - cron: '*/3 4-10 * * *'
+    - cron: '*/3 9-15 * * 1-5'
 
 jobs:
   build:
@@ -26,3 +26,12 @@ jobs:
           DB_NAME: u448360173_niftyoption
           DB_USER: u448360173_niftyoption
           DB_PASS: eDOzfAc8Y1
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
