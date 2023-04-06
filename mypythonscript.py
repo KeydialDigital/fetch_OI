@@ -23,7 +23,7 @@ dbconn = mysql.connector.connect(
 
 # # Define the table schema
 table_schema = '''
-CREATE TABLE IF NOT EXISTS option_chain (
+CREATE TABLE IF NOT EXISTS option_data (
     id INT AUTO_INCREMENT PRIMARY KEY,
     symbol VARCHAR(55) NOT NULL,
     instrument_type VARCHAR(10) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS option_chain (
     askQty INT NOT NULL,
     askPrice FLOAT NOT NULL,
     underlyingValue FLOAT NOT NULL,
-    timestamp timestamp NOT NULL
+    timestamp DATETIME NOT NULL
 )
 '''
 
@@ -80,7 +80,7 @@ def fetchoc(symbols):
                     info = k
                     info["instrument_type"] = j
                     info["symbol"] = symbol
-                    # info["timestamp"] = timestamp
+                    info["timestamp"] = timestamp
                     ocdata.append(info)
         # Insert the option chain data into the database
         if ocdata:
@@ -89,10 +89,4 @@ def fetchoc(symbols):
             df.to_sql("option_chain", con=engine, if_exists="append", index=False)
 
 # Fetch the option chain data every 10 seconds
-while True:
-    try:
-        fetchoc(scrip)
-        time.sleep(179)
-    except Exception as e:
-        print(e)
-        time.sleep(179)
+fetchoc(scrip)
