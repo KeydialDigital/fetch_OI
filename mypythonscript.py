@@ -80,7 +80,6 @@ def fetchoc(symbols):
                     info = k
                     info["instrument_type"] = j
                     info["symbol"] = symbol
-                    #info["timestamp"] = timestamp
                     ocdata.append(info)
         # Insert the option chain data into the database
         if ocdata:
