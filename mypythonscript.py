@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS option_data (
     askQty INT NOT NULL,
     askPrice FLOAT NOT NULL,
     underlyingValue FLOAT NOT NULL,
-    timestamp DATETIME NOT NULL
+    timestamp timestamp NOT NULL
 )
 '''
 
@@ -59,7 +59,7 @@ scrip = ["NIFTY", "BANKNIFTY"]
 # timestamp = int(time.time())
 timezone = pytz.timezone('Asia/Kolkata')
 # Get the current date and time in India timezone
-timestamp = datetime.datetime.now(timezone)
+#timestamp = datetime.datetime.now(timezone)
 
 def fetchoc(symbols):
     for symbol in symbols:
@@ -80,6 +80,7 @@ def fetchoc(symbols):
                     info = k
                     info["instrument_type"] = j
                     info["symbol"] = symbol
+                    #info["timestamp"] = timestamp
                     ocdata.append(info)
         # Insert the option chain data into the database
         if ocdata:
