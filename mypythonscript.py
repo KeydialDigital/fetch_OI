@@ -59,7 +59,7 @@ scrip = ["NIFTY", "BANKNIFTY"]
 # timestamp = int(time.time())
 timezone = pytz.timezone('Asia/Kolkata')
 # Get the current date and time in India timezone
-india_date = datetime.datetime.now(timezone)
+timestamp = datetime.datetime.now(timezone)
 
 def fetchoc(symbols):
     for symbol in symbols:
